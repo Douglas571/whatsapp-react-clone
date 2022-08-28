@@ -1,13 +1,61 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --gap: 8px;
+  --gap-2: calc(var(--gap) * 2);
+
+  --bg-primary: rgb(100, 100, 100);
+  --bg-secondary: hsl(0deg 0% 23%);
+
+  --primary-color: hsl(162deg 100% 44%);
+
+  --font-primary-color: hsl(0deg 0% 90%);
+  --font-secondary-color: hsl(0deg 0% 75%);
+
+  --main-font: 'helvetica';
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  margin: 0px;
+  padding: 0px;
+  font-size: 16px;
+
+  color: var(--font-primary-color);
+  box-sizing: border-box;
+
+}
+
+body {
+  font-family: var(--main-font);
+  
+}
+
+button {
+  font-size: calc(10px + 2vmin);
+}
+
+.window-size {
+  width: 100vw;
+  overflow-x: scroll;
+}
+
+#content {
+  /*the number of sections (camera, chats, etc) per 100vw*/
+  width: 400vw;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.bg-darkest {
+  flex: 1 100vw;
+
+  background-color: var(--bg-secondary);
+  height: 100vh;
+}
+
+.bg-darkest div {
+  background-color: var(--bg-secondary);
+}
+
+.pl {
+  padding-left: var(--gap-2);
+  padding-top: var(--gap);
 }

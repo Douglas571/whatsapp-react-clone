@@ -1,0 +1,10 @@
+.archive-button {
+  display: flex;
+
+  padding: 0 var(--gap-2);
+  margin: var(--gap) 0;
+}
+
+.archive-button h2 {
+  margin-left: var(--gap-2)
+}

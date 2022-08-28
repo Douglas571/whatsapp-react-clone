@@ -1,0 +1,28 @@
+.list-item {
+  display: flex;
+  align-items: center;
+
+  padding: var(--gap);
+
+  margin-left: var(--gap);
+}
+
+.list-item .right {
+}
+
+.list-item .center {
+  margin-left: var(--gap-2);
+  flex: 2;
+}
+
+.list-item .left {
+}
+
+.list-item .title {
+  margin-bottom: var(--gap);
+  font-weight: bold;
+}
+
+.list-item .text {
+  color: var(--font-secondary-color);
+}

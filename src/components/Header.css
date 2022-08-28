@@ -1,0 +1,50 @@
+div {
+  background-color: var(--bg-primary);
+}
+
+.header-top {
+  display: flex;
+
+  align-items: center;
+
+  padding: calc(var(--gap) * 1);
+  padding-bottom: 0px;
+}
+
+.header-top h1 {
+  flex-grow: 1;
+}
+
+.header-down {
+  overflow: scroll;
+}
+
+.header-down::-webkit-scrollbar { 
+  display:  none;
+}
+
+.header-down .tabs{
+  display: flex;
+}
+
+.tabs .tab {
+  text-align: center;
+  flex-grow: 1;
+
+  position: relative;
+  overflow: hidden;
+
+  padding: var(--gap);
+  background-color: inherit;
+  border: none;
+
+  pointer-event: none;
+}
+
+.tab-indicator {
+  position: relative;
+  height: 3px;
+  background-color: var(--primary-color);
+
+  transition: all cubic-bezier(0, 0.48, 0, 1.06) 0.1s 0s;
+}

@@ -1,0 +1,35 @@
+.icon-button {
+  position: relative;
+  overflow: hidden;
+  
+  color: var(--font-primary-color);
+  background-color: var(--bg-primary);
+
+  outline: 0;
+  border: 0;
+
+  width: 35px;
+  height: 35px;
+
+  border-radius: 50%;
+
+  transition: background 400ms;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center
+}
+
+.icon-button_cont {
+  position: absolute;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: rgba(255,255,255,0);
+  }
+
+  100% {
+    background-color: rgba(255,255,255,0.2);
+  }
+}
