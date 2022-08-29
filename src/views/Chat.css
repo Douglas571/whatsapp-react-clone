@@ -1,0 +1,78 @@
+#chat {
+  width: 100vw;
+  height: 100vh; 
+
+  display: flex;
+  flex-direction: column;
+
+
+  background-color: hsl(10, 50%, 50%);
+}
+
+#chat nav {
+  display: flex;
+  align-items: center;
+
+  padding: var(--gap);
+  background-color: var(--bg-primary);
+}
+
+#chat nav h1 {
+  margin-left: 1em;
+  flex: 1;
+
+}
+
+#chat section {
+  flex: 1;
+}
+
+#chat footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-around;
+
+  
+  padding: var(--gap);
+  max-width: 100vw;
+
+  gap: 5px;
+}
+
+#chat footer #message-input {
+  flex: 1;
+  display: flex;
+  align-items: center;
+
+  height: 2.5em;
+
+  border-radius: 1000px;
+
+  padding: 0 var(--gap);
+}
+
+#chat footer #message-input input {
+  display: inline-block;
+  min-width: 8em;
+  max-width: 8.5em;
+
+  background-color: var(--bg-primary);
+  border: none;
+}
+
+#chat footer #message-input input::placeholder {
+  color: var(--font-secondary-color);
+}
+
+#chat footer #audio-record-button {
+  background-color: var(--primary-color);
+  border-radius: 1000px;
+
+  width: 2.5em;
+  height: 2.5em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

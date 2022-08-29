@@ -7,11 +7,12 @@ export default function ListItem(props) {
     right,
     title,
     text,
-    left
+    left,
+    onClick,
   } = props
 
   return (
-    <RippleBox>
+    <RippleBox onClick={onClick}>
       <div className="list-item">
         { (right) ? 
           <div className="right">{right}</div>

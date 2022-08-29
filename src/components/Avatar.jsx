@@ -4,11 +4,16 @@ import { useState } from 'react'
 const Avatar = (props) => {
 
   let {src, bubble} = props
+  let className = "avatar"
+
   if (bubble) {
     console.log({bubble})
   }
+
+  className += props.small ? ' small' : ''
+  
   return (
-    <div className="avatar">
+    <div className={className}>
       <img
         src={src}
       />

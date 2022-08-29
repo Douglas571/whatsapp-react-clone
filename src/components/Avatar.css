@@ -38,6 +38,10 @@
   border-radius: 100px;
 }
 
+.avatar.small img {
+  width: 40px;
+}
+
 .avatar .bubble{
   position: absolute;
 

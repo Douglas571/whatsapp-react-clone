@@ -8,7 +8,7 @@ const RippleBox = (props) => {
   const containerRef = useRef()
   const [ripples, setRipples] = useState([])
 
-  let {children, position} = props
+  let {children, position, onClick, inLine, className, id} = props
 
   function addRipple(evt) {
     console.log('Adding ripple!...')
@@ -42,10 +42,18 @@ const RippleBox = (props) => {
     setRipples([...ripples, newRipple])
   }
 
+  useEffect(() => {
+    if (onClick) onClick()
+  }, [ripples])
+
+  className += ' ripple-box'
+  className += inLine ? ' inline-block' : ''
+
   return (
     <div 
+      id={id}
       ref={containerRef}
-      className="ripple-box"
+      className={className}
       onClick={addRipple}>
       {children}
       { ripples.map( r => <Ripple key={r.id} position={r.position}/>)}

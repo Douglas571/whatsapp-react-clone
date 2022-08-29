@@ -3,7 +3,7 @@
   overflow: hidden;
   
   color: var(--font-primary-color);
-  background-color: var(--bg-primary);
+  background-color: inherit;
 
   outline: 0;
   border: 0;

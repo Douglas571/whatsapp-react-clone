@@ -31,14 +31,22 @@ div {
   text-align: center;
   flex-grow: 1;
 
+  font-weight: bold;
+  font-size: 0.8em;
+
   position: relative;
   overflow: hidden;
 
   padding: var(--gap);
   background-color: inherit;
   border: none;
+}
 
-  pointer-event: none;
+.tab span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
 .tab-indicator {

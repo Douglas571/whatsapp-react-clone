@@ -1,7 +1,10 @@
 import React from 'react'
 import Ripple from './Ripple.jsx'
+import Icon from './Icon.jsx'
+
 const Tab = React.forwardRef((props, ref) => {
   const {
+    children,
     title,
     nClick
   } = props
@@ -55,7 +58,10 @@ const Tab = React.forwardRef((props, ref) => {
       onClick={handleClick}
       {...props}>
 
-      {title}
+      { children
+        ? children
+        : title
+      }
       {ripples.map( r => <Ripple key={r.id} position={r.position}/>)}
     </button>
   )

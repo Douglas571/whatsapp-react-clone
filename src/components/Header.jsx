@@ -4,6 +4,7 @@ import {useState, useRef, useEffect} from 'react'
 import styled from 'styled-components'
 
 import IconButton from '@/components/IconButton'
+import Icon from '@/components/Icon.jsx'
 import Tab from '@/components/Tab'
 
 function Header(props){
@@ -52,6 +53,10 @@ function Header(props){
       p.ref = currentTabRef
     }
 
+    if (t == "_camera_") {
+      return <Tab {...p}><Icon be="camera_alt"/></Tab>
+    }
+
     return (
       <Tab {...p}/>
     )
@@ -63,10 +68,10 @@ function Header(props){
         <h1>WhatsApp</h1>
 
         <IconButton>
-          ()_
+          <Icon be="search"/>
         </IconButton>
         <IconButton>
-          !
+          <Icon be="more_vert"/>
         </IconButton>
       </div>
 

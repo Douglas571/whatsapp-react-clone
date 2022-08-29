@@ -5,8 +5,10 @@ import RippleBox from './RippleBox.jsx'
 
 import ListItem from './ListItem.jsx'
 
-function UserChat({user}) {
-  const { name, date, lastMessage, avatar } = user
+function UserChat(props) {
+  const { name, date, lastMessage, avatar } = props.user
+  const { onClick } = props
+
   const containerRef = useRef()
   const [ripples, setRipples] = useState([])
 
@@ -50,6 +52,7 @@ function UserChat({user}) {
       title={name}
       text={lastMessage}
       left={<div>{date}</div>}
+      onClick={onClick}
     />      
   )
 }

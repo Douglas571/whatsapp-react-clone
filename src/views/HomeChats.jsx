@@ -1,11 +1,15 @@
-import './Chats.css'
+import './HomeChats.css'
 import { useState, forwardRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import UserChat from '../components/UserChat.jsx'
 import RippleBox from '../components/RippleBox.jsx'
 import ListItem from '../components/ListItem.jsx'
 
+import Icon from '@/components/Icon.jsx'
+
 const Chats = forwardRef((props, ref) => {
+  const navigate = useNavigate()
   const usersChat = [
     { 
       id: 1,
@@ -26,12 +30,18 @@ const Chats = forwardRef((props, ref) => {
   return (
       <section ref={ref} className="bg-darkest basic-margin">
         <ListItem
-          right={<div>icono archivados</div>}
+          right={<Icon be="archive"/>}
           title={<h2>Archivados</h2>}
         />
 
         <div>
-          { usersChat.map( user => <UserChat key={user.id} user={user}/>) }
+          { usersChat.map( user => 
+            <UserChat 
+              key={user.id} 
+              user={user}
+              onClick={ () => navigate(`/chat/${user.id}`)}/>
+            ) 
+          }
         </div>
       </section>
     )
