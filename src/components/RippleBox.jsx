@@ -8,17 +8,33 @@ const RippleBox = (props) => {
   const containerRef = useRef()
   const [ripples, setRipples] = useState([])
 
-  let {children, position, onClick, inLine, className, id} = props
+  let {
+    children, 
+    position, 
+    onClick, 
+    inLine,
+    className = ' ', 
+    id,
+  } = props
+
+  /*useEffect(() => {
+    if (ripples.length && onClick) {
+      onClick()
+    }
+  }, [ripples])
+*/
+  className += ' ripple-box'
+  className += inLine ? ' inline-block' : ''
 
   function addRipple(evt) {
-    console.log('Adding ripple!...')
+    //console.log('Adding ripple!...')
     const container = containerRef.current
     const button = evt.target
     const diameter = Math.max(container.clientWidth, container.clientHeight);
     const radius = diameter / 2;
 
-    console.log({x: event.clientX, y: event.clientY})
-    console.log({c: container.getBoundingClientRect()});
+    //console.log({x: event.clientX, y: event.clientY})
+    //console.log({c: container.getBoundingClientRect()});
 
     const cl = container.getBoundingClientRect().left
     const ct = container.getBoundingClientRect().top
@@ -33,21 +49,16 @@ const RippleBox = (props) => {
       }
     }
 
-    console.log(newRipple.position);
+    //console.log(newRipple.position);
 
     if (ripples[0]) {
       ripples.shift()
     }
 
     setRipples([...ripples, newRipple])
+
+    if(onClick) onClick(evt)
   }
-
-  useEffect(() => {
-    if (onClick) onClick()
-  }, [ripples])
-
-  className += ' ripple-box'
-  className += inLine ? ' inline-block' : ''
 
   return (
     <div 

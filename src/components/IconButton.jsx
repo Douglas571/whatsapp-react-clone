@@ -10,10 +10,12 @@ function IconButton(props) {
   const { onClick } = props
 
   return (
-      <RippleBox inLine>
+      <RippleBox inLine
+        onClick={onClick}
+
+      >
         <button
-          className="icon-button"
-          onClick={onClick}
+          className="icon-button"  
         > 
           {props.children}
         </button>

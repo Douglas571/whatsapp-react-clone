@@ -1,0 +1,15 @@
+.drop-down-list.u-visible {
+  animation: drop-list 200ms ease;
+  animation-fill-mode: forwards;
+  transform-origin: top right;
+}
+
+@keyframes drop-list {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}

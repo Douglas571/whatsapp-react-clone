@@ -5,6 +5,17 @@
   background-color: inherit;
 }
 
+.ripple-box.fullh {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ripple-box.grow {
+  flex: 1;
+}
+
 .ripple-box.inline-block {
   display: inline-block;
   border-radius: 1000px;

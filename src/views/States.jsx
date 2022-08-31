@@ -6,6 +6,7 @@ import ListItem from '../components/ListItem.jsx'
 const States = forwardRef((props, ref) => {
   let [recents, setRecents] = useState([
     {
+      id: 1,
       name: 'Carlitos',
       lastStatus: {
         date: '2:20 pm',
@@ -13,6 +14,7 @@ const States = forwardRef((props, ref) => {
       }
     },
     {
+      id: 2,
       name: 'Maggy',
       lastStatus: {
         date: '12:30 am',
@@ -20,6 +22,7 @@ const States = forwardRef((props, ref) => {
       }
     },
     {
+      id: 3,
       name: 'Joaquin',
       lastStatus: {
         date: 'yesterday',
@@ -33,6 +36,7 @@ const States = forwardRef((props, ref) => {
 
   let recentElements = recents.map( user => 
     (<ListItem
+      key={user.id}
       right={
         <Avatar 
           src={user.lastStatus.miniature}

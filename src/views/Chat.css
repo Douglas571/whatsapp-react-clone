@@ -65,6 +65,10 @@
   color: var(--font-secondary-color);
 }
 
+#chat footer #message-input input:focus {
+  outline: none;
+}
+
 #chat footer #audio-record-button {
   background-color: var(--primary-color);
   border-radius: 1000px;
@@ -76,3 +80,78 @@
   align-items: center;
   justify-content: center;
 }
+
+
+#messages {
+  padding: .5em;
+}
+
+.msg {
+  display: flex;
+  justify-content: end;
+  margin-bottom: .8em;
+}
+
+.msg .content {
+  display: inline-flex;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  padding: 5px 5px;
+
+  gap: var(--gap);
+}
+
+.msg .content .info {
+  display: flex;
+  align-items: flex-end;
+  background-color: inherit;
+  gap: var(--gap);
+}
+
+.msg div .date {
+  font-size: .8em;
+  display: flex;
+  align-items: flex-end;
+
+  color: hsl(0, 0%, 57%);
+  font-weight: bold;
+}
+
+.msg.other {
+  justify-content: start;
+}
+
+.msg.other div {
+  background-color: var(--bg-secondary);
+}
+
+.msg .material-icons-round {
+  font-size: .95em;
+  color: hsl(0, 0%, 57%);
+}
+
+.msg .material-icons-round {
+  font-size: .95em;
+  color: hsl(0, 0%, 57%);
+}
+
+.msg .material-icons-round.readed {
+  animation: msg-readed 400ms ease;
+  animation-fill-mode: forwards;
+}
+
+@keyframes msg-readed {
+  from {
+    transform: scaleX(1);
+  }
+
+  50% {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+    color: blue;
+  }
+}
+
