@@ -17,8 +17,10 @@ import Calls from '@/views/Calls.jsx'
 const Home = () => {
   const navigate = useNavigate()
   const [currentTab, setCurrentTab] = useState('CHATS')
+
   const scrollContainer = useRef()
 
+  const headerRef = useRef()
   const relations = {
     _camera_: [null, 'CHATS'],
     CHATS: ['_camera_', 'STATES'],
@@ -60,9 +62,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    console.log({new_currentTab: currentTab})
-    scrollTo(currentTab)
-    
+    scrollTo(currentTab)    
   }, [currentTab])
 
   function handleScroll(evt) {
@@ -145,14 +145,30 @@ const Home = () => {
     }
   }
 
+
+  let globalStyles
+  if(currentTab === '_camera_') {
+    console.log({new_currentTab: currentTab})
+    let height = headerRef.current.clientHeight
+    globalStyles = {transform: `translateY(-${height + 1}px)`}
+  } else {
+    globalStyles = {}
+  }
+
   return (
       <motion.div
         animate="in"
         variants={pageVariants}
         transition={pageTransition}
+
+        style={globalStyles}
       >
 
-        <Header onTabChange={handleTabChange} currentTab={currentTab}/>
+        <Header 
+          ref={headerRef}
+          onTabChange={handleTabChange} 
+          currentTab={currentTab}
+        />
         <div 
           className="window-size"
           ref={scrollContainer}

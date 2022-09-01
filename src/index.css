@@ -22,7 +22,11 @@
 
   color: var(--font-primary-color);
  
+  scrollbar-width: none;
+}
 
+*::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -62,6 +66,24 @@ button {
   padding-top: var(--gap);
 }
 
+.u-flex {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.u-alg-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+.u-rounded {
+  border-radius: 1000px;
+}
+
+.u-px1 {
+  padding: 0 5px;
+}
 /*
 .u-hide {
   visibility: hidden;

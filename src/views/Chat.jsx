@@ -97,12 +97,15 @@ export default function Chat(props) {
       transition={pageTransition}
     >
       <nav>
-        <IconButton onClick={()=> navigate('..')}>
+        <RippleBox 
+          className="u-rounded u-flex" 
+          onClick={()=> navigate('..')}
+        >
           <Icon be="arrow_back"/>
-        </IconButton>
+          <Avatar src="/avatar.jpg" small/>
+        </RippleBox>
         
         <RippleBox className="grow fullh">
-          <Avatar src="/avatar.jpg" small/>
           <h1>user #{id}</h1>
         </RippleBox>
         <div style={{display: 'flex', gap: '5px'}}>

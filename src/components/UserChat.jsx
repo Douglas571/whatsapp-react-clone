@@ -16,7 +16,7 @@ function UserChat(props) {
       right={<Avatar src={avatar}/>}
       title={name}
       text={lastMessage}
-      left={<div>{date}</div>}
+      left={<div className="u-alg-start">{date}</div>}
       onClick={onClick}
     />      
   )

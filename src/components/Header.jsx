@@ -1,15 +1,15 @@
 import "./Header.css"
 
-import {useState, useRef, useEffect} from 'react'
+import {useState, useRef, useEffect, forwardRef} from 'react'
 import styled from 'styled-components'
 
 import IconButton from '@/components/IconButton'
 import Icon from '@/components/Icon.jsx'
 import Tab from '@/components/Tab'
 
-function Header(props){
+let Header = forwardRef((props, ref) => {
 
-  const {onTabChange, currentTab} = props
+  const {onTabChange, currentTab, style} = props
 
   const tabs = ['_camera_', 'CHATS', 'STATES', 'CALLS']
   
@@ -66,7 +66,10 @@ function Header(props){
   })
 
   return (
-    <div className="header">
+    <div 
+      ref={ref}
+      className="header"
+      style={style}>
       <div className="header-top">
         <h1>WhatsApp</h1>
 
@@ -91,6 +94,6 @@ function Header(props){
       </div>
     </div>
   )
-}
+})
 
 export default Header

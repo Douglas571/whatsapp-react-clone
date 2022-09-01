@@ -45,6 +45,8 @@
   display: flex;
   align-items: center;
 
+  gap: var(--gap);
+
   height: 2.5em;
 
   border-radius: 1000px;
@@ -54,8 +56,9 @@
 
 #chat footer #message-input input {
   display: inline-block;
-  min-width: 8em;
-  max-width: 8.5em;
+  width: 60%;
+  
+  flex-grow: 1;
 
   background-color: var(--bg-primary);
   border: none;

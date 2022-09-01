@@ -13,7 +13,7 @@ export default function ListItem(props) {
 
   return (
     <RippleBox onClick={onClick}>
-      <div className="list-item">
+      <div className="list-item u-alg-start">
         { (right) ? 
           <div className="right">{right}</div>
           : null

@@ -1,9 +1,10 @@
 import { useState, forwardRef } from 'react'
+import UploadPhoto from './UploadPhoto.jsx'
 
 const Camera = forwardRef((props, ref) => {
   return (
       <section ref={ref} className="bg-darkest">
-        <h1>Camera</h1>
+        <UploadPhoto/>
       </section>
     )
 })

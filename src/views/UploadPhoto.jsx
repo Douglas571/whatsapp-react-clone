@@ -59,8 +59,6 @@ export default function UploadPhoto(props) {
       videoRef.current.height = height
       canvasRef.current.width = width
       canvasRef.current.height = height
-      photoRef.current.width = width
-      photoRef.current.height = height
 
       setStreaming(true)
     }
@@ -102,11 +100,7 @@ export default function UploadPhoto(props) {
         onCanPlay={defineSize}
       ></video>
       <canvas id="canvas" ref={canvasRef}></canvas>
-      <img ref={photoRef} 
-        src={photoSrc} 
-        id="photo" 
-        alt="photo"/>
-
+      
       
       <div className="panel">
         
