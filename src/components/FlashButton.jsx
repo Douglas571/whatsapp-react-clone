@@ -55,24 +55,14 @@ export default function FlashButton(props) {
     onChange(newCurrentState)
   }
 
-  useEffect(() => {
-    //console.log({stack, currentState})
-  }, [stack])
-
   return (
-      <RippleBox className="flash-button" onClick={updateFlash}>
+      <RippleBox 
+        className="flash-button" 
+        onClick={updateFlash}
+      >
         <div className="scroll">
           { stack.map( item => <Icon be={item.icon} key={item.id}/>)}        
         </div>
       </RippleBox>
     )
 }
-
-/*
-  
-<RippleBox className="flash-button" onClick={updateFlash}>
-        <div className="scroll">
-          { stack.map( item => <Icon be={item.icon} key={item.id}/>)}        
-        </div>
-      </RippleBox>
-*/
