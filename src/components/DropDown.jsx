@@ -11,42 +11,25 @@ export default function DropDown (props) {
   function closeDropDown(evt) {
     console.log(evt.target)
     if (evt.target.id === 'ddb') {
-      console.log('closing drop down...')
       setSubList([])
       onExit(evt)
     }
   }
 
-  const visibility = show ? 'visible' : 'hidden'
-  
-  let styles = { 
-      position: 'fixed', 
-      top: '0',
-      left: '0',
-      background: 'none', 
-      width: '100vw',
-      height: '100vh',
-      zIndex: '1000',
-      visibility
-    }
+  let className = 'drop-down'
+  className += show ? ' u-visible' : ' u-hide'
 
-  //console.log({show, visibility, styles})
   return (
     <div 
     id="ddb"
-    style={{...styles}}
-    onClick={closeDropDown}>
+    onClick={closeDropDown}
+    className={className}>
+
 
       { subList.length
-        ? <DropDownList content={subList} show={show}/>
-        : <DropDownList content={content} show={show}
-            onDisplaySubList={
-            (c) => {
-              console.log('asigned a sub list')
-              console.log({c})
-              setSubList(c)
-            }
-          }/>
+        ? <DropDownList content={subList} onExit={onExit}/>
+        : <DropDownList content={content} onExit={onExit}
+            onDisplaySubList={(sub) => setSubList(sub)}/>
       }
       
     </div>
@@ -60,43 +43,37 @@ function DropDownList (props) {
   let items = content.map((it, i) => {
     
     let onClick
+    let itemProps
+
     if (it.content) {
-      //console.log({itemSubList: it})
 
        onClick = (evt) => {
-        console.log(evt.target)
+        if (it.onClick) 
+          it.onClick(evt)
         
-        console.log('on Click fired!')
-        
-        
-        if (it.onClick) it.onClick(evt)
         onDisplaySubList(it.content)
-        evt.nativeEvent.stopImmediatePropagation();
       }
       
+      itemProps = {...it, onClick}  
+      return (<DropDownItem key={i} {...itemProps}/>)
     }
 
+    if (it.onClick) {
+      onClick = (evt) => {
+        onClick(evt)
+        onExit(evt)
+      }
 
-    let props = {...it, onClick}
+      itemProps = {...it, onClick}  
+      return (<DropDownItem key={i} {...itemProps}/>) 
+    }
 
-    return (<DropDownItem key={i} {...props}/>)
-
+    itemProps = {...it}  
+    return (<DropDownItem key={i} {...itemProps}/>)
   })
 
-  //console.log('exit the function map')
-
-  let className = "drop-down-list"
-  className += show ? ' u-visible' : ''
-
   return (
-    <div style={{
-      position: "absolute",
-      border: '1px solid red',
-      right: '4px',
-      top: '4px',
-    }}
-      className={className}
-    >
+    <div className='drop-down-list'>
       <ul>
         {items}
       </ul>
@@ -106,6 +83,7 @@ function DropDownList (props) {
 
 function DropDownItem(props) {
   let { text, content, onClick } = props
+  console.log(props)
   return (
     <RippleBox onClick={onClick}> 
       <li style={{padding: '10px'}}>{text}</li>

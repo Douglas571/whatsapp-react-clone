@@ -25,7 +25,10 @@ function Header(props){
     
   }, [])
 
-  const toggleTo = ({tabPosition, title}) => {
+  const toggleTo = (data) => {
+    console.log({t: data.target})
+    console.log({toggleTo_data: data})
+    const {tabPosition, title} = data
     const {width, x} = tabPosition
 
     const contBound = tabRef.current.getBoundingClientRect()
@@ -45,7 +48,7 @@ function Header(props){
     const p = {
         key: i,
         title: t,
-        nClick: toggleTo
+        onClick: toggleTo
     }
 
     if(tabs[i] == currentTab){

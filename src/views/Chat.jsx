@@ -69,14 +69,14 @@ export default function Chat(props) {
   ])
 
   let more_more_options = [
-    { text: 'Reportar' },
+    { text: 'Reportar', onClick: () => { console.log('reportando...')}},
     { text: 'Bloquear' },
     { text: 'Vaciar chat' },
     { text: 'Crear acceso directo' },
   ]
 
   let more_options = [
-    { text: 'Ver contacto' },
+    { text: 'Ver contacto', onClick: () => { console.log('abriendo contacto...')} },
     { text: 'Buscar' },
     { text: 'Silenciar notificaciones'},
     { text: 'Mensajes temporales' },

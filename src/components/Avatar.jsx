@@ -7,7 +7,7 @@ const Avatar = (props) => {
   let className = "avatar"
 
   if (bubble) {
-    console.log({bubble})
+    //console.log({bubble})
   }
 
   className += props.small ? ' small' : ''

@@ -1,5 +1,16 @@
-.drop-down-list.u-visible {
-  animation: drop-list 200ms ease;
+
+.drop-down { 
+  position: fixed; 
+  top: 0;
+  left: 0;
+  background: none;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+}
+
+.drop-down.u-visible {
+  animation: drop-list 100ms ease;
   animation-fill-mode: forwards;
   transform-origin: top right;
 }
@@ -7,9 +18,35 @@
 @keyframes drop-list {
   from {
     transform: scale(0);
+    visibility: hidden;
   }
 
   to {
     transform: scale(1);
+    visibility: visible;
   }
+}
+
+.drop-down.u-hide {
+  animation: fold-list 100ms ease;
+  animation-fill-mode: forwards;
+  transform-origin: top right; 
+}
+
+@keyframes fold-list {
+  from {
+    transform: scale(1);
+    visibility: visible;
+  }
+
+  to {
+    transform: scale(0);
+    visibility: hidden;
+  }
+}
+
+.drop-down-list {
+  position: absolute;
+  right: 4px;
+  top: 4px;
 }

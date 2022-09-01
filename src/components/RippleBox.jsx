@@ -57,7 +57,9 @@ const RippleBox = (props) => {
 
     setRipples([...ripples, newRipple])
 
-    if(onClick) onClick(evt)
+    setTimeout(() => {
+      if(onClick) onClick(evt)
+    }, 200)
   }
 
   return (

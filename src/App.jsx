@@ -14,6 +14,7 @@ import Home from '@/views/Home.jsx'
 import Config from '@/views/Config.jsx'
 
 import Chat from '@/views/Chat.jsx'
+import UploadPhoto from '@/views/UploadPhoto.jsx'
 //<Route path="/chat" element={<Chat/>}/>
 
 const App = () => {
@@ -24,6 +25,8 @@ const App = () => {
           <Route path="/" element={<Home/>}/>
           <Route path="/chat/:id" element={<Chat/>}/>
           
+          <Route path="/upload-photo" element={<UploadPhoto/>}/>
+
         </Routes>      
       </AnimatePresence>
     )

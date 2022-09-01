@@ -1,9 +1,11 @@
 import { useState, forwardRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Avatar from '../components/Avatar.jsx'
 import ListItem from '../components/ListItem.jsx'
 
 const States = forwardRef((props, ref) => {
+  let navigate = useNavigate()
   let [recents, setRecents] = useState([
     {
       id: 1,
@@ -50,6 +52,7 @@ const States = forwardRef((props, ref) => {
 
   let seenElements = seen.map( user => 
     (<ListItem
+      key={user.id}
       right={
         <Avatar 
           src={user.lastStatus.miniature}
@@ -63,6 +66,7 @@ const States = forwardRef((props, ref) => {
 
   let silencedElements = silenced.map( user => 
     (<ListItem
+      key={user.id}
       right={
         <Avatar 
           src={user.lastStatus.miniature}
@@ -86,6 +90,7 @@ const States = forwardRef((props, ref) => {
           }
           title="My State"
           text="Add your state"
+          onClick={() => navigate('/upload-photo')}
         />
         {
           recents.length ?

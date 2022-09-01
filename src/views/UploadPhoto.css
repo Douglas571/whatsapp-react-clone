@@ -1,0 +1,59 @@
+.upload-photo {
+  width: 100vw;
+  height: 100vh;
+
+
+}
+
+.upload-photo #video {
+  
+}
+
+.upload-photo #canvas {
+  display: none;
+}
+
+.upload-photo #photo {
+  transform: scale(0.2);
+
+  position: fixed;
+
+  left: 30%;
+  top: 30%;
+}
+
+.upload-photo .panel {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  margin-bottom: 1rem;
+  background-color: transparent;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-end;
+}
+
+.controls {
+  margin: 1rem 2rem;
+  text-align: center;
+}
+
+.controls .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.controls .buttons .camera-shot-box {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}

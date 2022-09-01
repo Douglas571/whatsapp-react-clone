@@ -6,15 +6,16 @@ const Tab = React.forwardRef((props, ref) => {
   const {
     children,
     title,
-    nClick
+    onClick
   } = props
 
   const [ripples, setRipples] = React.useState([])
 
   function handleClick(evt) {
+    console.log('executing handle click event')
     let { width, x } = evt.target.getBoundingClientRect()
     //console.log(evt.target)
-    nClick({
+    onClick({
       tabPosition: {
         width, x
       }, 
@@ -55,8 +56,7 @@ const Tab = React.forwardRef((props, ref) => {
     <button 
       ref={ref}
       className="tab"
-      onClick={handleClick}
-      {...props}>
+      onClick={handleClick}>
 
       { children
         ? children

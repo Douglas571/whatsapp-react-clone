@@ -62,6 +62,12 @@ button {
   padding-top: var(--gap);
 }
 
+/*
 .u-hide {
-  visibility: 'hide';
+  visibility: hidden;
 }
+
+.u-visible {
+  visibility: visible;
+}
+*/

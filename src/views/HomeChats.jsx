@@ -39,7 +39,10 @@ const Chats = forwardRef((props, ref) => {
             <UserChat 
               key={user.id} 
               user={user}
-              onClick={ () => navigate(`/chat/${user.id}`)}/>
+              onClick={ () => {
+                console.log('opening chat...')
+                navigate(`/chat/${user.id}`)
+              }}/>
             ) 
           }
         </div>
