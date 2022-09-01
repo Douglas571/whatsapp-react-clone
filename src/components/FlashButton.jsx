@@ -6,13 +6,13 @@ import Icon from './Icon.jsx'
 import RippleBox from './RippleBox.jsx'
 
 
+// TO-DO: Add the animation of moving down.
+
 const flash = {
   on: 'flash_on',
   off: 'flash_off',
   auto: 'flash_auto',
 }
-
-const flash_order = ['on', 'off', 'auto']
 
 export default function FlashButton(props) {
 
