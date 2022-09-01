@@ -5,15 +5,13 @@ import { useState, useEffect, useRef } from 'react'
 import Icon from '@/components/Icon.jsx'
 import IconButton from '@/components/IconButton.jsx'
 import CameraShotButton from '@/components/CameraShotButton.jsx'
-
-let flash = {
-  on: 'flash_on',
-  off: 'flash_off',
-  auto: 'flash_auto',
-}
+import FlashButton from '@/components/FlashButton.jsx'
 
 export default function UploadPhoto(props) {
 
+  let [photos, setPhotos] = useState([])
+
+  
   let [streaming, setStreaming] = useState(false)
   let videoRef = useRef(null)
   let canvasRef = useRef(null)
@@ -76,7 +74,7 @@ export default function UploadPhoto(props) {
       .getContext('2d')
       .drawImage(videoRef.current, 0, 0, width, height);
     let data = canvasRef.current.toDataURL('image/png');
-    setPhotoSrc(data)
+    setPhotos([...photos, data])
   }
 
   function recordVideo() {
@@ -85,6 +83,10 @@ export default function UploadPhoto(props) {
 
   function finishVideo() {
     console.log('end video')
+  }
+
+  function handleFlashChange(state) {
+    console.log({new_flash_state: state})
   }
 
   return (
@@ -107,13 +109,20 @@ export default function UploadPhoto(props) {
 
       
       <div className="panel">
-        <div className="photos"></div>
+        
+        <div className="photos">
+          <div>
+            { photos.map( src => <img src={src}/> )}
+          </div>
+          
+
+        </div>
+
         <div className="controls">
           
           <div className="buttons">
-            <IconButton>
-              <Icon be={flash.on}/>
-            </IconButton>
+            <FlashButton
+              onChange={handleFlashChange}/>
 
             <div className="camera-shot-box">
               <CameraShotButton

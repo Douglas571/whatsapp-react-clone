@@ -57,3 +57,25 @@
   display: flex;
   justify-content: center;
 }
+
+.photos {
+
+  border: 1px solid red;
+  overflow: scroll;
+
+}
+
+.photos div {
+  width: calc(100vw * 2);
+
+  display: flex;
+
+  gap: 5px;
+}
+
+.photos img {
+  border: 1px solid blue;
+
+  width: 70px;
+  height: 70px;
+}

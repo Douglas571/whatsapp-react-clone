@@ -32,7 +32,8 @@ export default function CameraShotButton(props) {
     }
   }
 
-  function handleTouchEnd() {
+  function handleTouchEnd(evt) {
+    //console.log({evt})
     setTouching(false)
 
     if (holding) {
