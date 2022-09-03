@@ -8,61 +8,125 @@ import Icon from '@/components/Icon.jsx'
 import Tab from '@/components/Tab'
 
 let Header = forwardRef((props, ref) => {
+  const {currentTab, tabs, tabMovement, onTabChange, style} = props
 
-  const {onTabChange, currentTab, style} = props
-
-  const tabs = ['_camera_', 'CHATS', 'STATES', 'CALLS']
+  useEffect(() => {
+    console.log({in_header_currentTab: currentTab})
+  }, [currentTab])
   
   const tabRef = useRef()
-  const currentTabRef = useRef(null)
+
+  const tabReferences = {
+    camera: useRef(),
+    chats: useRef(),
+    states: useRef(),
+    calls: useRef()
+  }
 
   const [tabIndicatorStyle, setTabIndicatorStyle] = useState({})
   
   // set initial tab indicator
   useEffect(() => {
-    //console.log(currentTabRef)
-    currentTabRef.current.click()  
-    
-  }, [])
+    updateTabIndicator(currentTab)
+  }, [currentTab])
 
   const toggleTo = (data) => {
     console.log({t: data.target})
     console.log({toggleTo_data: data})
     const {tabPosition, title} = data
-    const {width, x} = tabPosition
+    
+    updateTabIndicator(title)
 
-    const contBound = tabRef.current.getBoundingClientRect()
-
-    const move = -contBound.x + x
-    const style = {
-      width: width +'px', 
-      transform: "translate(" + move + "px)"
-    }
-    //console.log(style)
-    setTabIndicatorStyle(style)
+    console.log('fired on tab change')
     onTabChange(title)
   }
 
+  function moveTabIndicator() {
+    const {prev, next} = tabs[currentTab]
+    const current = tabReferences[currentTab].current
+    let to
+  
+    let percent = tabMovement.percent
+    let style = {}
+    let move = 0
+    let amount = 0
 
-  const tabsHtml = tabs.map((t, i) => {
-    const p = {
-        key: i,
-        title: t,
-        onClick: toggleTo
-    }
+    let {width, startX} = current.getBoundingClientRect()
 
-    if(tabs[i] == currentTab){
+    if (tabMovement.direction === 'l') {
+      to = tabReferences[prev].current
       
-      p.ref = currentTabRef
+    } else {
+      to = tabReferences[next].current
     }
 
-    if (t == "_camera_") {
-      return <Tab {...p}><Icon be="camera_alt"/></Tab>
+    let toWidth =  to.getBoundingClientRect().width
+
+    move = to.getBoundingClientRect().x
+    
+
+    amount = ((100 - percent) * 100) / toWidth
+
+    if (tabMovement.direction === 'l') {
+      
+      //move -= amount  
+      console.log('left ', move)
+    } else {
+      //move += amount
+      console.log('right ', move)
     }
 
-    return (
-      <Tab {...p}/>
-    )
+    console.log({move})
+
+    style = {
+      width: toWidth +'px', 
+      transform: "translate(" + move + "px)"
+    }
+
+    
+
+
+    //const move = -contBound.x + x
+    
+    setTabIndicatorStyle(style)
+  }
+
+
+  /*
+      10% "r"
+  
+
+      w        c
+      100px => 100%
+        x   => 10%
+
+      move = (p * 100) / w
+    */
+
+
+  function updateTabIndicator(tab) {
+    const element = tabReferences[tab].current
+
+    const {width, x} = element.getBoundingClientRect()
+
+    const style = {
+      width: width +'px', 
+      transform: "translate(" + x + "px)"
+    }
+    setTabIndicatorStyle(style)
+  }
+
+  const tabsHtml = Object.keys(tabs).map( title => {
+    const properties = {
+      title,
+      key: title,
+      icon: tabs[title].icon,
+      onClick: toggleTo,
+      ref: tabReferences[title]
+
+    }
+
+    return <Tab {...properties}/>
   })
 
   return (

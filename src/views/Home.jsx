@@ -14,32 +14,43 @@ import HomeChats from '@/views/HomeChats.jsx'
 import States from '@/views/States.jsx'
 import Calls from '@/views/Calls.jsx'
 
+let tabs = {
+  camera: {
+    prev: 'calls',
+    next: 'chats',
+    icon: 'camera_alt'
+  },
+  chats: {
+    prev: 'camera',
+    next: 'states',
+  },
+  states: {
+    prev: 'chats',
+    next: 'calls',
+  },
+  calls: {
+    prev: 'states',
+    next: 'camera',
+  }
+}
+
 const Home = () => {
+  // Third party hooks
   const navigate = useNavigate()
-  const [currentTab, setCurrentTab] = useState('CHATS')
+
+  // ---- //
+  const [currentTab, setCurrentTab] = useState('chats')
+  let [draging, setDraging] = useState(false)
+  let [tabMovement, setTabMovement] = useState()
 
   const scrollContainer = useRef()
-
   const headerRef = useRef()
-  const relations = {
-    _camera_: [null, 'CHATS'],
-    CHATS: ['_camera_', 'STATES'],
-    STATES: ['CHATS', 'CALLS'],
-    CALLS: ['STATES', null]
-  }
 
   const references = {
-    _camera_: createRef(),
-    CHATS: createRef(),
-    STATES: createRef(),
-    CALLS: createRef()
-  }
-
-  const elements = {
-    _camera_: 0,
-    CHATS: 1,
-    STATES: 2,
-    CALLS: 3
+    camera: useRef(),
+    chats: useRef(),
+    states: useRef(),
+    calls: useRef()
   }
 
   function handleTabChange(tab) {
@@ -47,84 +58,83 @@ const Home = () => {
   }
 
   function scrollTo(tab) {
-    // determinate the selected section
-    let sectionX = references[tab].current.getBoundingClientRect().left
-    console.log({sectionX})
-    console.log({rect: references[tab].current})
+    let element = references[tab].current
 
-    // move to the position
-    
+    let sectionX = element.getBoundingClientRect().x
+
     let currentScroll = scrollContainer.current.scrollLeft
     let totalScroll = currentScroll + sectionX
+
     scrollContainer.current.scrollTo({left: totalScroll, behavior: 'smooth'})
-    console.log({left: scrollContainer.current.scrollLeft})
-
   }
-
-  useEffect(() => {
-    scrollTo(currentTab)    
-  }, [currentTab])
 
   function handleScroll(evt) {
-    // calculate the scrolled distance
-      // get current secction
-      const sectionX = references[currentTab].current.getBoundingClientRect().x
-      const ww = window.innerWidth
-      
-      let difference
-      let percent
+    // TO-DO: research for some way to improve this handleScroll method
 
-      let direction
-      let moveTo
+    // get current secction
+    console.log('touch end!')
+    const element = references[currentTab].current
 
-      
-      if (sectionX < 0) {
-        console.log('it moves to the left')
-        difference = ww + sectionX
-        direction = 'r'
-      } else {
-        console.log('it moves to the rigth')
-        difference = ww - sectionX
-        direction = 'l'
-      }
+    //console.log({element, currentTab})
 
-      percent = 100 - ((difference * 100) / ww)
-      console.log({
-        sectionX, 
-        ww, 
-        difference, 
-        percent, 
-        direction, 
-        currentTab,
-        relactions: relations[currentTab],
-      })
+    const sectionX = element.getBoundingClientRect().x
+    const ww = window.innerWidth
+    
+    let difference
+    let percent
+    let direction
+    let moveTo
+
+    
+    if (sectionX < 0) {
+      //console.log('it moves to the left')
+      difference = ww + sectionX
+      direction = 'r'
+    } else {
+      //console.log('it moves to the rigth')
+      difference = ww - sectionX
+      direction = 'l'
+    }
+
+    percent = 100 - ((difference * 100) / ww)
+    /*console.log({
+      sectionX, 
+      ww, 
+      difference, 
+      percent, 
+      direction, 
+      currentTab,
+      relactions: tabs[currentTab],
+    })
+    */
 
 
-      if (direction === 'l') {
-        moveTo = relations[currentTab][0]
-      } else {
-        moveTo = relations[currentTab][1]
-      }
+    if (direction === 'l') {
+      moveTo = tabs[currentTab].prev
+    } else {
+      moveTo = tabs[currentTab].next
+    }
 
-      // if the scroll is less of the 70% of view widht, return
-      if ((percent < 60) || (!moveTo)) {
+    // if the scroll is less of the 70% of view widht, return
+    if ((percent < 60) || (!moveTo)) {
 
-        console.log('move canceled')
-        console.log({moveTo})
-        scrollTo(currentTab)
-        return
-      }
+      //console.log('move canceled')
+      //console.log({moveTo})
+      scrollTo(currentTab)
+      return
+    }
 
-      setCurrentTab(moveTo)
+    setCurrentTab(moveTo)
   }
 
-  let [draging, setDraging] = useState(false)
   function determinateTabPosition(evt) {
+    console.log({left: scrollContainer.current.scrollLeft})
     if (draging) {
-      console.log('end of drag!')
       setDraging(false)
+
       handleScroll(evt)      
     }
+    
   }
 
   const pageTransition = {
@@ -147,7 +157,7 @@ const Home = () => {
 
 
   let globalStyles
-  if(currentTab === '_camera_') {
+  if(currentTab === 'camara') {
     console.log({new_currentTab: currentTab})
     let height = headerRef.current.clientHeight
     globalStyles = {transform: `translateY(-${height + 1}px)`}
@@ -155,12 +165,61 @@ const Home = () => {
     globalStyles = {}
   }
 
+  useEffect(() => {
+    scrollTo(currentTab)
+  }, [currentTab])
+
+  function updateTabIndicator(evt) {
+    //const touch = evt.touches[0]
+    //console.log({touch})
+    //console.log({cont: scrollContainer.current.scrollLeft})
+
+    //console.log(`cx: ${touch.clientX} cy: ${touch.clientY}, px: ${touch.pageX} py: ${touch.pageY}`)
+
+    const element = references[currentTab].current
+
+    //console.log({element, currentTab})
+    const sectionX = element.getBoundingClientRect().x
+    console.log({sectionX})
+    const ww = window.innerWidth
+    
+    let difference = 0
+    let percent = 0
+    let direction = ''
+    let moveTo
+    
+    if (sectionX < 0) {
+      //console.log('it moves to the left')
+      difference = ww + sectionX
+      direction = 'r'
+    } else {
+      //console.log('it moves to the rigth')
+      difference = ww - sectionX
+      direction = 'l'
+    }
+
+    percent = 100 - ((difference * 100) / ww) 
+
+    if (direction === 'l') {
+      moveTo = tabs[currentTab].prev
+    } else {
+      moveTo = tabs[currentTab].next
+    }
+
+    setTabMovement({
+      state: 'moving',
+      to: moveTo,
+      percent,
+      direction
+    })
+  }
+
+
   return (
       <motion.div
         animate="in"
         variants={pageVariants}
         transition={pageTransition}
-
         style={globalStyles}
       >
 
@@ -168,18 +227,22 @@ const Home = () => {
           ref={headerRef}
           onTabChange={handleTabChange} 
           currentTab={currentTab}
+          tabs={tabs}
+
+          tabMovement={tabMovement}
         />
         <div 
           className="window-size"
           ref={scrollContainer}
-          onTouchMove={() => setDraging(true)}
+          onTouchStart={() => setDraging(true)}
+          onScroll={updateTabIndicator}
           onTouchEnd={determinateTabPosition}
           >
           <main id="content">
-            <Camera ref={references['_camera_']}></Camera>
-            <HomeChats ref={references['CHATS']}></HomeChats>
-            <States ref={references['STATES']}></States>
-            <Calls ref={references['CALLS']}></Calls>
+            <Camera ref={references.camera}></Camera>
+            <HomeChats ref={references.chats}></HomeChats>
+            <States ref={references.states}></States>
+            <Calls ref={references.calls}></Calls>
           </main>  
         </div>
       </motion.div>      

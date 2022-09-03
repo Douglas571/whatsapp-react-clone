@@ -6,7 +6,8 @@ const Tab = React.forwardRef((props, ref) => {
   const {
     children,
     title,
-    onClick
+    onClick,
+    icon
   } = props
 
   const [ripples, setRipples] = React.useState([])
@@ -58,8 +59,8 @@ const Tab = React.forwardRef((props, ref) => {
       className="tab"
       onClick={handleClick}>
 
-      { children
-        ? children
+      { icon
+        ? <Icon be={icon}/>
         : title
       }
       {ripples.map( r => <Ripple key={r.id} position={r.position}/>)}
