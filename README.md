@@ -1,5 +1,5 @@
 <h1 align="center">
-  Whatsapp Reat Clone
+  WhatsApp React Clone
 </h1>
 
 This is a personal project to practice with React.js and implement animations in pure CSS.
